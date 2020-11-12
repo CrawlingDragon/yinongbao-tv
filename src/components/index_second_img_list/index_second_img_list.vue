@@ -1,18 +1,10 @@
 <template>
   <div class="index_second_img_list">
     <ul>
-      <li>
-        <img :src="expert.avatar" alt="" />
-        <div class="tip"><span>专家</span></div>
-        <div class="text-bar">{{ expert.realname }}</div>
-      </li>
-      <li>
-        <img :src="video.thumb" alt="" />
-        <div class="tip"><span>培训视频</span></div>
-      </li>
-      <li>
-        <img :src="goods.thumb" alt="" />
-        <div class="tip"><span>NEW</span></div>
+      <li v-for="(item,index) in 3" :key="item">
+        <img src="" alt="">
+        <div class="tip"><span>培训</span></div>
+        <div class="text-bar" v-if="index == 0">郭靖</div>
       </li>
     </ul>
   </div>
@@ -21,26 +13,7 @@
 export default {
   name: "index_second_img_list",
   components: {},
-  props: {
-    expert: {
-      type: Object,
-      default: function() {
-        return {};
-      }
-    },
-    video: {
-      type: Object,
-      default: function() {
-        return {};
-      }
-    },
-    goods: {
-      type: Object,
-      default: function() {
-        return {};
-      }
-    }
-  },
+  props: {},
   data() {
     return {};
   },
@@ -56,9 +29,10 @@ export default {
   ul
     display flex
     li
-      width 360px
+      width 340px
       position relative
-      height 260px
+      height 255px
+      border 1px solid pink
       margin-right 10px
       &:first-child
         width 255px
@@ -81,7 +55,7 @@ export default {
           transform rotate(41deg)
           display block
           margin-left -8px
-          margin-top 10px
+          margin-top 14px
           font-size 22px
           font-family SimHei
           width 100%

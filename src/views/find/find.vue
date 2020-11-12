@@ -2,64 +2,37 @@
   <div class="find-container">
     <Header title="发现"></Header>
     <div class="nav-bar">
-      <div
-        class="item"
-        v-for="(item, index) in navList"
-        :key="item.catid"
-        :class="{ active: activeIndex == index }"
-        @click="nav(item.catid, index)"
-      >
-        <span class="active">{{ item.catname }}</span>
+      <div class="item" v-for="(item,index) in navList" :key="item.catid" :class="{'active':activeIndex == index}" @click="nav(item.catid,index)">
+        <span class="active">{{item.catname}}</span>
       </div>
     </div>
-    <ul class="infinite-list find-ul" v-show="activeIndex == 0">
-      <li
-        v-for="item in list"
-        class="infinite-list-item"
-        :key="item.id"
-        @click="goToDetail(item.catid, item.id)"
-      >
+    <ul class="infinite-list find-ul">
+      <li v-for="item in list" class="infinite-list-item" :key="item.id">
         <div class="bj-wrap">
           <el-image :src="item.thumb" class="small-img" fit="cover">
             <div slot="error" class="image-slot">
               <div class="icon"></div>
             </div>
           </el-image>
-          <div class="title-bar">{{ item.title }}</div>
+          <div class="title-bar">{{item.title}}</div>
           <div class="text">
-            {{ item.copyfrom }}
-            <span class="time">{{ item.inputtime }}</span>
+            {{item.copyfrom}}
+            <span class="time">{{item.inputtime}}</span>
           </div>
         </div>
       </li>
     </ul>
-    <ul class="bingchonghai" v-show="activeIndex != 0">
-      <li
-        v-for="item in list"
-        :key="item.id"
-        @click="goToDetail(item.catid, item.id)"
-      >
-        <div class="content">
-          <el-image class="el-img" :src="item.thumb"></el-image>
-          <div class="p">{{ item.title }}</div>
-        </div>
-      </li>
-    </ul>
-    <Nav :index="4" v-if="purview == 1"></Nav>
-    <NavSecond :index="4" v-if="purview == 2"></NavSecond>
+    <Nav index="5"></Nav>
   </div>
 </template>
 <script>
+import Header from "@/components/headers/headers";
 import Nav from "@/components/nav_list/nav_list";
-import NavSecond from "@/components/nav_list_second/nav_list_second";
-import Header from "@/components/online_hospital_header/online_hospital_header";
-import { mapState } from "vuex";
 export default {
   name: "find",
   components: {
-    Nav,
     Header,
-    NavSecond
+    Nav,
   },
   props: {},
   data() {
@@ -68,12 +41,10 @@ export default {
       navList: [],
       activeIndex: 0,
       initCatid: 0,
-      list: []
+      list: [],
     };
   },
-  computed: {
-    ...mapState(["purview"])
-  },
+  computed: {},
   watch: {},
   mounted() {
     this.getNavList();
@@ -82,7 +53,7 @@ export default {
   methods: {
     getNavList(catId) {
       // 获取导航栏目
-      this.$axios.fetchGet("/Home/News/GetPushMessageMenu").then(res => {
+      this.$axios.fetchGet("/Home/News/GetPushMessageMenu").then((res) => {
         if (res.data.code == 200) {
           this.navList = res.data.data;
           this.initCatid = res.data.data[0].catid;
@@ -96,7 +67,7 @@ export default {
       // 获取列表数据
       this.$axios
         .fetchPost("/Home/News/GetPushMessageList", { catId: catid })
-        .then(res => {
+        .then((res) => {
           if (res.data.code == 200) {
             this.list = res.data.data;
           }
@@ -107,23 +78,11 @@ export default {
       this.activeIndex = index;
       this.getList(catid);
     },
-    goToDetail(catid, id) {
-      // 导航去发现详情页
-      this.$router.push({
-        path: "/find_detail",
-        query: {
-          catid: catid,
-          id: id
-        }
-      });
-    }
-  }
+  },
 };
 </script>
 <style lang="stylus" scoped>
 .find-container
-  padding-top 100px
-  padding-bottom 150px
   .nav-bar
     margin 0 90px
     display flex
@@ -201,37 +160,4 @@ export default {
       &:nth-child(even)
         .bj-wrap
           margin-left 10px
-  .bingchonghai
-    width 100%
-    margin-top 50px
-    text-align left
-    padding 0 90px
-    & > li
-      width 20%
-      padding-right 20px
-      position relative
-      display inline-block
-      height 300px
-      vertical-align top
-      margin-bottom 20px
-      &:nth-child(5n)
-        padding-right 0
-      .content
-        width 100%
-        height 100%
-        cursor pointer
-      .p
-        width 100%
-        position absolute
-        left 0
-        bottom 0
-        background: linear-gradient(0deg, rgba(3, 0, 0, 0.84) 0%, rgba(3, 0, 0, 0) 100%);
-        line-height 72px
-        height 72px
-        padding-left 14px
-        color #fff
-        font-size 30px
-      .el-img
-        width 100%
-        height 100%
 </style>

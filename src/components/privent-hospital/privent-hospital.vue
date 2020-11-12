@@ -1,17 +1,27 @@
 <template>
   <div class="privent-content">
     <slot></slot>
-    <div class="map-box" v-if="showComponent">
+    <div
+      class="map-box"
+      v-if="showComponent"
+    >
       <Maps
-        :name="cityMap"
+        :name=cityMap
         :mapData="proMapData"
-        @upCity="getDownCity"
+        @upCity='getDownCity'
         @getMidData="clickMapMidBar"
       ></Maps>
       <!-- :mapIndex="pieIndex" -->
     </div>
-    <div class="map-hospital-box" v-if="showComponent">
-      <MapHospital :CurMp="pie" :cityNames="secondName" :count="count">
+    <div
+      class="map-hospital-box"
+      v-if="showComponent"
+    >
+      <MapHospital
+        :CurMp="pie"
+        :cityNames="secondName"
+        :count="count"
+      >
       </MapHospital>
     </div>
     <CityHospital
@@ -21,6 +31,7 @@
       :list="secondPieList"
       :pieLi="secondPieLi"
     ></CityHospital>
+
   </div>
 </template>
 <script>
@@ -33,9 +44,9 @@ export default {
   data() {
     return {
       cityNameCom: "",
-      pieArray: [], // pie的数据
+      pieArray: [], //pie的数据
       count: {}, // 庄稼医院，会员，专家等数量
-      secondPieList: [] // 第二个pie的数据
+      secondPieList: [] //第二个pie的数据
     };
   },
   props: {
@@ -59,7 +70,7 @@ export default {
       "isstore"
     ]),
     showComponent() {
-      const id = this.$store.state.loginId;
+      let id = this.$store.state.loginId;
       if (id == 2) {
         return false;
       } else {
@@ -71,16 +82,20 @@ export default {
         // return true;
       }
     },
+    //获取当前导航的位置，判断是否取本级地区的数据,如果是从余杭区看 不包括市区在余杭区的数据
+    navareaname(){
+      return this.$store.state.breadArr[this.$store.state.breadArr.length-1].name
+    },
     cityName() {
-      const level = this.$store.state.globalLevel;
-      const clickName = this.$store.state.defaultProvince;
+      let level = this.$store.state.globalLevel;
+      let clickName = this.$store.state.defaultProvince;
       if (level === 3) {
-        // 那点击的地址就等于方块请求的地址，也等于方块数据的title
+        //那点击的地址就等于方块请求的地址，也等于方块数据的title
         this.getDefaultCity(clickName);
       } else if (level === 4) {
-        // 那点击的地址就等于请求的地址的第一个下一级，也等于方块数据的title
+        //那点击的地址就等于请求的地址的第一个下一级，也等于方块数据的title
         // 从defaultAddressArr里匹配
-        const arr = this.$store.state.defaultAddressArr;
+        let arr = this.$store.state.defaultAddressArr;
         arr.forEach(item => {
           if (clickName == item.name) {
             this.getDefaultCity(item.city[0].name);
@@ -93,7 +108,7 @@ export default {
     },
     pie() {
       // 给2个pie饼图的数据
-      const arr = [];
+      let arr = [];
       if (this.pieArray) {
         this.pieArray.forEach(item => {
           if (item.value !== 0) {
@@ -109,19 +124,19 @@ export default {
       return arr;
     },
     secondPieLi() {
-      const arr = [];
+      let arr = [];
       this.pieArray.forEach(item => {
         arr.push(item.name);
       });
 
       return arr;
-    }, // 显示pie下方li地址
+    }, //显示pie下方li地址
     secondName() {
-      // 二级请求的地址
+      //二级请求的地址
       return this.$store.state.defaultCity;
     },
     secondLevel() {
-      // 二级请求的地址等级
+      //二级请求的地址等级
       return this.$store.state.secondGlobalLevel;
     },
     loginId() {
@@ -145,33 +160,29 @@ export default {
       "getSecondGlobalLevel"
     ]),
     getDownCity(obj) {
-      // 地图过来的二级城市选择
+      //地图过来的二级城市选择
       this.pieIndex = obj.index;
       // console.log("obj :", obj);
-      // 改变vuex的二级地址，触发二级地址的watch，在本page
+      //改变vuex的二级地址，触发二级地址的watch，在本page
       this.$emit("clickMapForData", obj);
-      console.log(obj.childName);
+      console.log(obj.childName)
       this.getDefaultCity(obj.childName);
       this.getIsnav(1);
       this.getSecondGlobalLevel(obj.childLevel);
       // this.getMapData(this.secondName, obj.level, this.loginId, 0);
     },
-    getMapData(name, level, loginId, isnav) {
+    getMapData(name, level, loginId, isnav,navareaname) {
       if (level <= 1) {
         level = this.globalLevel;
       }
       if (level != 2) {
-        this.getBviousName(null); // 重置二级导航
-        this.getBviousLevel(null); // 重置二级导航
+        this.getBviousName(null); //重置二级导航
+        this.getBviousLevel(null); //重置二级导航
       }
-      this.$axios
-        .fetchPost("Home/NationwideDatav/GetCurMpData", {
-          areaname: name,
-          level: level,
-          userlevel: loginId,
-          isnav: isnav,
-          isstore: this.isstore
-        })
+      this.$axios.fetchPost(
+          "Home/NationwideDatav/GetCurMpData",
+          {areaname:name,level:level,userlevel:loginId,isnav:isnav,isstore:this.isstore,navareaname:navareaname}
+        )
         .then(res => {
           if (res.data.code == 200) {
             this.count = res.data.data.count;
@@ -187,7 +198,7 @@ export default {
         });
     },
     clickMapMidBar(midObj) {
-      // 点击地图，更新中间区域数据
+      //点击地图，更新中间区域数据
       // this.getMapData(midObj.name, midObj.level, this.loginId, this.isnav);
       this.getDefaultCity(midObj.name);
       // console.log("text :");
@@ -205,6 +216,15 @@ export default {
     bviousName(newVal) {
       if (newVal == null) return;
       this.getMapData(newVal, this.bviousLevel, this.loginId, 1);
+    },
+    navareaname(newVal,oldval){
+      this.getMapData(
+      this.secondName,
+      this.secondLevel,
+      this.loginId,
+      this.isnav,
+      this.navareaname
+      );
     }
   },
   components: {

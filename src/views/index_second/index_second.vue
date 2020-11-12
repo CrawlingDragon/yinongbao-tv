@@ -1,10 +1,12 @@
 <template>
   <div class="index_second-container">
-    <Header :title="headerTitle" :logoSrc="logoSrc"></Header>
+    <Header title="黄泽黄桃专科医院">
+      <div class="del-icon" @click="open"></div>
+    </Header>
     <div class="second-container">
       <div class="left-bar">
         <div class="swiper-box">
-          <SwiperBox :list="swiper"></SwiperBox>
+          <!-- <SwiperBox></SwiperBox> -->
         </div>
         <div class="mid-nav">
           <div class="item1"></div>
@@ -13,20 +15,24 @@
           <div class="item4"></div>
         </div>
         <div class="bottom-bar">
-          <div class="item" @click="goToExpertRanking">
+          <div class="item">
             <div class="l">
               <div class="icon icon01"></div>
               <p class="p1">专家回复</p>
               <p class="p2">排行榜</p>
             </div>
             <div class="r">
-              <div
-                class="list"
-                v-for="(item, index) in rank_experts"
-                :key="item.uid"
-              >
-                <span class="number number1">{{ index + 1 }}</span>
-                <span class="name">{{ item.realname }}</span>
+              <div class="list">
+                <span class="number number1">1</span>
+                <span class="name">沈斌</span>
+              </div>
+              <div class="list">
+                <span class="number number2">2</span>
+                <span class="name">沈斌</span>
+              </div>
+              <div class="list">
+                <span class="number number3">3</span>
+                <span class="name">沈斌</span>
               </div>
             </div>
           </div>
@@ -37,116 +43,88 @@
               <p class="p2">会员</p>
             </div>
             <div class="r">
-              <div class="list" v-for="item in new_users" :key="item.id">
+              <div class="list">
                 <span class="num"></span>
-                <span class="name">{{ item.name }}</span>
+                <span class="name">沈斌</span>
+              </div>
+              <div class="list">
+                <span class="num"></span>
+                <span class="name">沈斌</span>
+              </div>
+              <div class="list">
+                <span class="num"></span>
+                <span class="name">沈斌</span>
               </div>
             </div>
           </div>
         </div>
+
       </div>
       <div class="right-bar">
         <div class="list-wrap">
-          <IndexSecondImgList
-            :expert="recommend_expert"
-            :goods="recommend_product"
-            :video="recommend_video"
-          ></IndexSecondImgList>
+          <IndexSecondImgList></IndexSecondImgList>
         </div>
         <div class="cetu-wrap">
-          <Cetu :list="cetu"></Cetu>
+          <Cetu></Cetu>
         </div>
         <div class="online-wrap">
-          <Online :list="answerlist"></Online>
+          <Online></Online>
         </div>
       </div>
     </div>
-    <NavList :index="2"></NavList>
+    <div class="nav-box">
+      <NavList></NavList>
+    </div>
   </div>
 </template>
 <script>
-import Header from "@/components/online_hospital_header/online_hospital_header";
+import Header from "@/components/headers/headers";
 import IndexSecondImgList from "@/components/index_second_img_list/index_second_img_list";
 import Cetu from "@/components/cetu_list/cetu_list";
 import Online from "@/components/online_list/online_list";
-import NavList from "@/components/nav_list_second/nav_list_second";
+import NavList from "@/components/nav_list/nav_list";
 import SwiperBox from "@/components/swiper_box/swiper_box";
-import { mapState } from "vuex";
 export default {
   name: "index_second",
   components: { Header, IndexSecondImgList, Cetu, NavList, Online, SwiperBox },
   props: {},
   data() {
-    return {
-      swiper: [],
-      experts: [],
-      answerlist: [],
-      headerTitle: "",
-      logoSrc: "",
-      rank_experts: [],
-      new_users: [],
-      recommend_expert: {},
-      recommend_video: {},
-      recommend_product: {},
-      cetu: []
-    };
+    return {};
   },
-  computed: {
-    ...mapState(["appId"])
-  },
+  computed: {},
   watch: {},
-  mounted() {
-    this.getIndexData();
-  },
+  mounted() {},
   destroyed() {},
   methods: {
-    getIndexData() {
-      this.$axios
-        .fetchPost("/Home/Index/GetIndexMpData", {
-          appId: this.appId
-        })
-        .then(res => {
-          if (res.data.code == 200) {
-            const data = res.data.data;
-            this.swiper = data.adlists;
-            this.experts = data.rank_experts;
-            this.answerlist = data.answerlists;
-            this.headerTitle = data.title;
-            this.logoSrc = data.logo;
-            this.cetu = data.ceturecords;
-            this.rank_experts = data.rank_experts;
-            this.new_users = data.new_users.splice(0, 3);
-            this.recommend_expert = data.recommend_expert[0];
-            this.recommend_video = data.recommend_video;
-            this.recommend_product = data.recommend_product;
-          }
-        });
-    },
-    goToExpertRanking() {
-      // 专家排行榜
-      this.$router.push({
-        path: "/expert_ranking"
-      });
+    open() {
+      // alert(1);
     }
   }
 };
 </script>
 <style lang="stylus" scoped>
 .index_second-container
-  padding-top 100px
-  padding-bottom 150px
+  .del-icon
+    width 35px
+    height 35px
+    background url('./17.png') no-repeat
+    background-size 35px 35px
+    margin-right 10px
+    cursor pointer
+  .nav-box
+    position fixed
+    left 0
+    bottom 0
+    right 0
   .second-container
-    margin 0 auto
-    max-width 1900px
-    min-width 1900px
+    margin 0 40px
     display flex
-    padding: 0 45px;
     .left-bar
-      width 900px
+      flex 1
       margin-right 20px
       .swiper-box
         width 100%
-        height 440px
+        height 420px
         background pink
         margin-bottom 20px
       .mid-nav
@@ -175,9 +153,8 @@ export default {
         margin-top 20px
         & > .item
           flex 1
-          cursor pointer
           display flex
-          padding 5px 0
+          padding 12px 0 19px
           background rgba(9, 29, 68, 1)
           border 2px solid rgba(7, 47, 101, 1)
           &:first-child
@@ -248,7 +225,4 @@ export default {
         margin-right 33px
       .online-wrap
         flex 1
-/deep/.online_list-wrap
-  .title
-    margin-bottom 15px
 </style>

@@ -13,40 +13,15 @@
 export default {
   name: "swiper-box",
   components: {},
-  props: {
-    list: {
-      type: Array,
-      default: function() {
-        return [];
-      }
-    }
-  },
+  props: {},
   data() {
-    return {
-      activeTid: 0
-    };
+    return {};
   },
   computed: {},
-  watch: {
-    list(newVal) {
-      if (newVal.length != 0) {
-        this.activeTid = this.list[0].catid;
-      }
-    }
-  },
+  watch: {},
   mounted() {},
   destroyed() {},
-  methods: {
-    changeItem(item, i1) {
-      this.activeTid = this.list[item].catid;
-    },
-    goToMessageDetail() {
-      this.$router.push({
-        path: "/find_detail",
-        query: { tid: this.activeTid }
-      });
-    }
-  }
+  methods: {}
 };
 </script>
 <style lang="stylus" scoped>
@@ -57,7 +32,6 @@ export default {
   /deep/.el-carousel__container
     height 100%
     position relative
-    cursor pointer
     .item-img
       width 100%
       height 100%
@@ -73,12 +47,4 @@ export default {
       line-height 80px
       padding-left 20px
       text-align left
-  /deep/.el-carousel__button
-    width 20px
-    height 20px
-    border-radius: 50%;
-  /deep/.el-carousel__indicators--horizontal
-    right 50px
-    left auto
-    bottom 15px
 </style>

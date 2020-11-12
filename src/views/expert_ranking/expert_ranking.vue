@@ -1,13 +1,92 @@
 <template>
   <div class="ranking-container">
-    <Header title="专家回复排行榜"></Header>
-    <el-carousel :interval="114000" type="card" class="car">
-      <el-carousel-item v-for="item in list" :key="item.uid">
-        <div class="img-box">
-          <el-image :src="item.avatar" fit="contain"></el-image>
+    <Head title="专家回复排行榜" :right_show_bar="false"></Head>
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="img-box">
+            <img
+              src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1594379897346&di=7b9d908626ec831c312293959d36c5cc&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Ff8180eacfbbd18755c4dfda545247109287d4fd91b0d45-fVjs6x_fw658"
+              alt
+            />
+          </div>
         </div>
-      </el-carousel-item>
-    </el-carousel>
+        <div class="swiper-slide">
+          <div class="img-box">
+            <img
+              src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1594379897346&di=7b9d908626ec831c312293959d36c5cc&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Ff8180eacfbbd18755c4dfda545247109287d4fd91b0d45-fVjs6x_fw658"
+              alt
+            />
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="img-box">
+            <img
+              src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1594379897346&di=7b9d908626ec831c312293959d36c5cc&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Ff8180eacfbbd18755c4dfda545247109287d4fd91b0d45-fVjs6x_fw658"
+              alt
+            />
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="img-box">
+            <img
+              src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1594379897346&di=7b9d908626ec831c312293959d36c5cc&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Ff8180eacfbbd18755c4dfda545247109287d4fd91b0d45-fVjs6x_fw658"
+              alt
+            />
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="img-box">
+            <img
+              src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1594379897346&di=7b9d908626ec831c312293959d36c5cc&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Ff8180eacfbbd18755c4dfda545247109287d4fd91b0d45-fVjs6x_fw658"
+              alt
+            />
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="img-box">
+            <img
+              src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1594379897346&di=7b9d908626ec831c312293959d36c5cc&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Ff8180eacfbbd18755c4dfda545247109287d4fd91b0d45-fVjs6x_fw658"
+              alt
+            />
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="img-box">
+            <img
+              src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1594379897346&di=7b9d908626ec831c312293959d36c5cc&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Ff8180eacfbbd18755c4dfda545247109287d4fd91b0d45-fVjs6x_fw658"
+              alt
+            />
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="img-box">
+            <img
+              src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1594379897346&di=7b9d908626ec831c312293959d36c5cc&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Ff8180eacfbbd18755c4dfda545247109287d4fd91b0d45-fVjs6x_fw658"
+              alt
+            />
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="img-box">
+            <img
+              src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1594379897346&di=7b9d908626ec831c312293959d36c5cc&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Ff8180eacfbbd18755c4dfda545247109287d4fd91b0d45-fVjs6x_fw658"
+              alt
+            />
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="img-box">
+            <img
+              src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1594379897346&di=7b9d908626ec831c312293959d36c5cc&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Ff8180eacfbbd18755c4dfda545247109287d4fd91b0d45-fVjs6x_fw658"
+              alt
+            />
+          </div>
+        </div>
+      </div>
+      <!-- Add Pagination -->
+      <div class="swiper-pagination"></div>
+    </div>
     <div class="text-box">
       <div class="left">
         <span>NO.1</span>
@@ -25,63 +104,38 @@
   </div>
 </template>
 <script>
-import Header from "@/components/online_hospital_header/online_hospital_header";
-import { mapState } from "vuex";
+import Head from "../../components/headers/headers";
 export default {
   name: "expert_ranking",
-  components: { Header },
+  components: { Head },
   props: {},
   data() {
-    return {
-      list: []
-    };
+    return {};
   },
-  computed: {
-    ...mapState(["appId", "purview"])
-  },
+  computed: {},
   watch: {},
-  mounted() {
-    this.getRanking();
-  },
+  mounted() {},
   destroyed() {},
-  methods: {
-    getRanking() {
-      this.$axios
-        .fetchGet("/Home/Expert/GetMpExpertRank", {
-          appId: this.appId,
-          purview: this.purview == (3 || 4) ? 1 : 0,
-          limit: 30
-        })
-        .then(res => {
-          if (res.data.code == 200) {
-            this.list = res.data.data;
-          }
-        });
-    }
-  }
+  methods: {}
 };
 </script>
 <style lang="stylus" scoped>
 .ranking-container
-  padding-top 100px
-  .car
-    width 800px
-    margin 0 auto
-    height 550px
-    /deep/.el-carousel__container
-      height 500px
-    /deep/.el-carousel__mask
-      background none
-  .img-box
-    width 350px
-    height 350px
-    border-radius 50%
-    border 6px solid rgba(255, 255, 255, 0.2)
-    overflow hidden
-    img
-      display block
-      width 100%
-      height 100%
+  .swiper-container
+    margin-left 90px
+    .swiper-wrapper
+      display flex
+      align-items center
+    .img-box
+      width 280px
+      height 280px
+      border-radius 50%
+      border 6px solid rgba(255, 255, 255, 0.2)
+      overflow hidden
+      img
+        display block
+        width 100%
+        height 100%
     .swiper-slide-active, .swiper-slide-duplicate-active
       .img-box
         width 350px

@@ -1,36 +1,39 @@
 <template>
   <div>
-    <div class="container" v-if="loading !== false">
+    <div
+      class="container"
+      v-if="loading !== false"
+    >
       <div class="headnav">
-        <Headnav
-          :cur_cityname="this.cur_cityname"
-          :changemoudle="this.changemoudle"
-          :middle_title="this.middle_title"
-        >
-        </Headnav>
+          <Headnav
+            :cur_cityname = this.cur_cityname
+            :changemoudle = this.changemoudle
+            :middle_title = this.middle_title
+          >
+          </Headnav>
       </div>
       <div class="content">
         <div>
           <div class="nav">
-            <Navs
-              v-bind:PercentArray="navHospitalArray"
-              v-bind:activeProvince="activeProvince"
-              v-bind:activeCity="activeCity"
-              v-on:getName="getNavData"
-              @out="loignOutBtn"
-            ></Navs>
-          </div>
+          <Navs
+            v-bind:PercentArray="navHospitalArray"
+            v-bind:activeProvince='activeProvince'
+            v-bind:activeCity='activeCity'
+            v-on:getName="getNavData"
+            @out="loignOutBtn"
+          ></Navs>
+        </div>
           <div class="country-hospital">
             <Box>
               <CountryHospital
-                v-bind:PercentArray="PercentArray"
+                v-bind:PercentArray=PercentArray
                 :title="countryTitle"
               >
               </CountryHospital>
             </Box>
           </div>
           <div class="privent-hospital">
-            <Box v-bind:showTitle="false">
+            <Box v-bind:showTitle=false>
               <PriventHospital
                 :cityName="secondQuestName"
                 :cityMap="letter"
@@ -38,64 +41,70 @@
                 @clickMapForData="getNavData"
               >
                 <PriventHead
-                  :Mpubcount="Mpubcount"
-                  :Usercount="Usercount"
-                  :Expertcount="Expertcount"
-                  :Servicecount="Servicecount"
-                  :Questioncount="Questioncount"
-                  :Recipecount="Recipecount"
+                  :Mpubcount=Mpubcount
+                  :Usercount=Usercount
+                  :Expertcount=Expertcount
+                  :Servicecount=Servicecount
+                  :Questioncount=Questioncount
+                  :Recipecount=Recipecount
                   :Productamount="Productamount"
                 ></PriventHead>
               </PriventHospital>
             </Box>
           </div>
-          <div class="newest-online">
-            <div class="newest-top">
-              <Box v-bind:title="newDiDiagnosis">
-                <div class="newest-online-wrap first-wrap">
-                  <NewestOnline :Replydata="Replydata"></NewestOnline>
-                </div>
+            <div class="newest-online">
+              <div class="newest-top">
+                <Box v-bind:title=newDiDiagnosis>
+                  <div class="newest-online-wrap first-wrap">
+                    <NewestOnline :Replydata=Replydata></NewestOnline>
+                  </div>
+                </Box>
+              </div>
+              <div class="yinongtong">
+                <Box
+                  v-bind:title=title
+                  v-bind:showTitle=false
+                >
+                  <div class="newest-online-wrap">
+                    <YiNongTong
+                      :isvideo="isvideo"
+                      @openvideo="getshowflag"
+                    >
+                    </YiNongTong>
+                  </div>
+                </Box>
+              </div>
+            </div>
+            <div class="swiper-hospital first-swiper">
+              <Box v-bind:title=title>
+                <SwiperHospital
+                  :Mplocaldata="FineMpdata"
+                  :selfUrl="'UserCenter/DataV/getHospitallist.html'"
+                  :selfDetailUrl="'Web/Mpublic/detail.html?mId='"
+                ></SwiperHospital>
               </Box>
             </div>
-            <div class="yinongtong">
-              <Box v-bind:title="title" v-bind:showTitle="false">
-                <div class="newest-online-wrap">
-                  <YiNongTong :isvideo="isvideo" @openvideo="getshowflag">
-                  </YiNongTong>
-                </div>
+            <div class="swiper-hospital">
+              <Box v-bind:title=title>
+                <SwiperBase
+                  :Mplocaldata="FineBasedata"
+                  :selfUrl="'/UserCenter/DataV/getGoodBaselist.html'"
+                  :selfDetailUrl="'Web/Company/detail?id='"
+                ></SwiperBase>
               </Box>
             </div>
-          </div>
-          <div class="swiper-hospital first-swiper">
-            <Box v-bind:title="title">
-              <SwiperHospital
-                :Mplocaldata="FineMpdata"
-                :selfUrl="'UserCenter/DataV/getHospitallist.html'"
-                :selfDetailUrl="'Web/Mpublic/detail.html?mId='"
-              ></SwiperHospital>
-            </Box>
-          </div>
-          <div class="swiper-hospital">
-            <Box v-bind:title="title">
-              <SwiperBase
-                :Mplocaldata="FineBasedata"
-                :selfUrl="'/UserCenter/DataV/getGoodBaselist.html'"
-                :selfDetailUrl="'Web/Company/detail?id='"
-              ></SwiperBase>
-            </Box>
-          </div>
-          <div class="ranking-list">
-            <Box>
-              <RankingList v-bind:afterExpphdata="Expphdata"></RankingList>
-            </Box>
-          </div>
-          <div class="ranking-list">
-            <Box>
-              <vipList
-                v-bind:colors="false"
-                v-bind:Memberdata="Memberdata"
-              ></vipList>
-            </Box>
+            <div class="ranking-list">
+              <Box>
+                <RankingList v-bind:afterExpphdata=Expphdata></RankingList>
+              </Box>
+            </div>
+            <div class="ranking-list">
+              <Box>
+                <vipList
+                  v-bind:colors=false
+                  v-bind:Memberdata=Memberdata
+                ></vipList>
+              </Box>
           </div>
         </div>
         <!-- <div v-if="this.changemoudle =='find'">
@@ -107,18 +116,11 @@
       </transition>
       <div v-if="this.showvideoflag == 1" class="video-wrap">
         <div class="close-btn" style="cursor:pointer" @click="closealert">
-          <span class="text1 jiantou">&lt;</span>
-          <span class="text1 close">关闭</span>
+            <span class="text1 jiantou">&lt;</span>
+            <span class="text1 close">关闭</span>
         </div>
         <div class="liubai"></div>
-        <video
-          class="video"
-          ref="video"
-          autoplay="true"
-          preload="auto"
-          controls
-          :src="this.isvideo.video_url"
-        ></video>
+        <video class="video" ref="video" autoplay="true" preload="auto" controls :src="this.isvideo.video_url"></video>
       </div>
     </div>
   </div>
@@ -128,19 +130,15 @@ import CountryHospital from "../../components/country-hospital/country-hospital"
 import PriventHospital from "../../components/privent-hospital/privent-hospital";
 import PriventHead from "../../components/privent-head/privent-head";
 import NewestOnline from "../../components/newest-online/newest-online";
-import SwiperBase from "../../components/swiper-base/swiper-base";
-import SwiperHospital from "../../components/swiper-hospital/swiper-hospital";
-import Navs from "../../components/navs/navs";
-import Headnav from "@/components/head_nav/head_nav";
-const YiNongTong = resolve =>
-  require(["../../components/yinongtong/yinongtong"], resolve);
-const RankingList = resolve =>
-  require(["../../components/ranking-list/ranking-list"], resolve);
-const vipList = resolve =>
-  require(["../../components/vip-list/vip-list"], resolve);
-const Box = resolve => require(["../../components/box/box"], resolve);
-const AlertTip = resolve =>
-  require(["../../components/alertTip/alertTip"], resolve);
+import SwiperBase from "../../components/swiper-base/swiper-base"
+import SwiperHospital from "../../components/swiper-hospital/swiper-hospital"
+import Navs from "../../components/navs/navs"
+import Headnav from "../../components/head_nav/head_nav"
+const YiNongTong = resolve=>require(["../../components/yinongtong/yinongtong"],resolve)
+const RankingList = resolve=>require(["../../components/ranking-list/ranking-list"],resolve)
+const vipList = resolve=>require(["../../components/vip-list/vip-list"],resolve)
+const Box = resolve=>require(["../../components/box/box"],resolve)
+const AlertTip = resolve=>require(["../../components/alertTip/alertTip"],resolve)
 import { mapMutations, mapState } from "vuex";
 
 export default {
@@ -177,29 +175,29 @@ export default {
       FineBasedata: [],
       Expphdata: [],
       Memberdata: [],
-      isvideo: {}, //判断数据是否为空，控制益农通不同效果
+      isvideo:{},//判断数据是否为空，控制益农通不同效果
       navHospitalArray: [], //导航----县乡镇医院数组
       confimFlag: false,
-      changemoudle: "index",
-      cur_cityname: window.sessionStorage.getItem("name"),
-      showvideoflag: false, //控制益农通视频点播
-      curmoudle: "index", //控制头部左侧导航样式,
-      middle_title: "新型庄稼医院管理驾驶舱" //中部标题
+      changemoudle : 'index',
+      cur_cityname:window.sessionStorage.getItem('name'),
+      showvideoflag:false,//控制益农通视频点播
+      curmoudle:'index',//控制头部左侧导航样式,
+      middle_title:'新型庄稼医院管理驾驶舱'//中部标题
     };
   },
   methods: {
     //控制益农通视频播放
-    getshowflag(msg) {
+    getshowflag(msg){
       // 益农通传递参数表示当前有视频资源
-      this.showvideoflag = msg;
+      this.showvideoflag = msg
     },
-    closealert() {
+    closealert(){
       // 关闭益农通播放视频弹窗
-      this.showvideoflag = false;
+      this.showvideoflag = false
     },
     loignOutBtn() {
-      // 退出登陆按钮
-      this.$refs.confimBox.showFlag = true;
+        // 退出登陆按钮
+        this.$refs.confimBox.showFlag = true;
     },
     chooseHospital(num) {
       //选择所有/或者新型医院
@@ -223,26 +221,25 @@ export default {
       "getIsstore"
     ]),
     getData(id, name, level, isClick) {
-      if (isClick & (isClick != 0)) {
+    if (isClick & (isClick != 0)) {
         const rLoading = this.openLoading();
         this.$axios
-          .fetchPost("/Home/NationwideDatav/GetDataVindex", {
-            userid: id,
-            areaname: name,
-            level: level,
-            isstore: this.isstore
-          })
+          .fetchPost(
+            "/Home/NationwideDatav/GetDataVindex",
+            {userid:id,areaname:name,level:level,isstore:this.isstore}
+            
+          )
           .then(res => {
             // this.FineMpdata = [];
-            this.$parent.app_loading = false;
-            rLoading.close();
+              this.$parent.app_loading = false
+              rLoading.close();
             if (res.data.code == 200) {
-              this.isvideo = res.data.data.Video; //益农通是否存在视频案例，得到的是一个包含视频资源的对象
-              this.$parent.app_loading = false;
+              this.isvideo = res.data.data.Video //益农通是否存在视频案例，得到的是一个包含视频资源的对象
+              this.$parent.app_loading = false
               this.loading = true;
               this.indexData = res.data.data;
               this.PercentArray = this.indexData.PercentArray;
-              this.CurMpArray = res.data.data.CurMpArray; //三级地址数组
+              this.CurMpArray = res.data.data.CurMpArray;//三级地址数组
               this.Mpubcount = this.indexData.Mpubcount;
               this.Usercount = this.indexData.Usercount;
               this.Expertcount = this.indexData.Expertcount;
@@ -282,7 +279,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(["isstore", "accountName"]),
+    ...mapState(["isstore","accountName"]),
     accountName() {
       return this.$store.state.accountName;
     },
@@ -306,27 +303,8 @@ export default {
       return `${this.firstQuestName}建院情况`;
     }
   },
-  // beforeRouteEnter:(to,from,next)=>{
-  //   // console.log('from',from)
-  //   // console.log('to',to)
-  //   // if(from.name == "Nexthospital"||from.name == "Expertlist"||from.path=="/hospitalsort"||from.path == "/discussscore"||from.path=="/expertranking"){
-  //   //   next(vm=>{vm.changemoudle = 'find'})
-  //   // }else if(from.path == "/defaultsort"||from.path == "/multiplesort"||from.path=="/selectsort"||from.path=="/discussscore"){
-  //   //   next(vm=>{vm.changemoudle = 'find'})
-  //   // }else if(from.path == "/"){
-  //   //   next(vm=>{vm.changemoudle = 'index'})
-  //   // }
-  // },
-  // created() {
-  //       let cur_status = window.sessionStorage.getItem("cur_status")
-  //       if(!cur_status){
-  //         this.changemoudle ="index"
-  //       }else{
-  //         this.changemoudle = window.sessionStorage.getItem("cur_status")
-  //       }
-  // },
   mounted() {
-    console.log(this.isvideo);
+    console.log(this.isvideo)
     this.userid = this.$route.query.userid;
     this.letter = this.$route.query.letter;
     this.navList = this.$store.state.defaultAddressArr; // 导航的省市乡县列表
@@ -357,22 +335,28 @@ export default {
       this.$router.go(0);
       // console.log("1 :>> ", 1);
     },
-    changemoudle(newVal, oldVal) {
-      if (oldVal == "find") {
+    changemoudle(newVal,oldVal){
+      if(oldVal == 'find'){
         // console.log(this.userid, this.firstQuestName, this.firstQuestLevel, 1)
-        this.navList = this.$store.state.defaultAddressArr;
+        this.navList = this.$store.state.defaultAddressArr
         this.getData(this.userid, this.firstQuestName, this.firstQuestLevel, 1);
       }
     }
   },
-  beforeDestroyed() {
-    console.log("1 :>> ", 1);
+  beforeDestroyed(){
+    console.log('1 :>> ', 1);
   }
 };
 </script>
 <style lang="stylus" scoped>
-bg-image($url)
-    @media (-webkit-min-device-pixel-ratio: 2),(min-device-pixel-ratio: 2)
+/deep/ .change-box {
+  @media screen and (min-width:1900px) {
+    top 80px 
+    right 255px 
+  }
+}
+bg-image($url) 
+    @media (-webkit-min-device-pixel-ratio: 2),(min-device-pixel-ratio: 2) 
         background-image: url($url + "@2x.png")
 .container
   width 100%
@@ -381,9 +365,10 @@ bg-image($url)
   position relative
   z-index 222
   .headnav
-    z-index 9999999
     position fixed
+    z-index 9999999
     min-width 1340px
+    width 100%
   .content
     width 1340px
     height calc(100vh)
@@ -486,31 +471,30 @@ bg-image($url)
       }
       &:last-child
         margin-right 0
-    .video-wrap
-      width 100%
-      height 100%
-      position absolute
-      left 0
-      right 0
-      top 0
-      bottom 0
-      background rgb(0, 0, 45)
-      z-index 11119999999
-      .close-btn
-        padding-top 15px
-        .text1
-            font-size 20px
-            color #7FB5F1
-            border-radius: 2px
-        .jiantou
-            position absolute
-            left 25px
-        .close
-            position absolute
-            left 45px
-      .liubai
-          padding-bottom 50px
-      .video
-          outline none
-          width 80%
+  .video-wrap
+    width 100%
+    height 1080px
+    position fixed
+    left 0
+    top 0
+    bottom 0
+    background rgb(0, 0, 45)
+    z-index 9999999999999
+    .close-btn
+      padding-top 15px
+      .text1
+          font-size 20px
+          color #7FB5F1
+          border-radius: 2px
+      .jiantou
+          position absolute
+          left 25px
+      .close
+          position absolute
+          left 45px
+    .liubai
+        padding-bottom 50px
+    .video
+        outline none
+        width 80%
 </style>

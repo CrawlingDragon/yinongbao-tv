@@ -9,39 +9,31 @@
         v-for="item in computedBreadArray"
         :key="item.name"
         class="bread_list"
-        @click="
-          getBreakData(
-            item.name,
-            item.id,
-            item.level,
-            item.letter,
-            item.isclick,
-            item.dname,
-            item.dlevel,
-            item.dindex
-          )
-        "
+        @click="getBreakData(item.name,item.id,item.level,item.letter,item.isclick,item.dname,item.dlevel,item.dindex)"
       >
-        <span class="address-name">{{ item.name }}</span>
+        <span class="address-name">{{item.name}}</span>
         <span class="symbol">></span>
       </div>
     </div>
-    <transition name="fade" mode="out-in" appear>
-      <div class="nav-content clearfix" v-show="showFlag">
+    <transition
+      name="fade"
+      mode="out-in"
+      appear
+    >
+      <div
+        class="nav-content clearfix"
+        v-show="showFlag"
+      >
         <!-- v-show="showFlag" -->
         <div class="t1 contryTitle">
           <span class="first-bar">全国</span>
           <span
             v-bind:class="[
-              activeProvinceComputed == '全国' ? 'active' : '',
-              getLoginId != 5 ? 'disabled' : ''
-            ]"
-            v-on:click="
-              getCountryDatas('全国', 0, 5, 'china', 1, '浙江省', 4, 0)
-            "
-            >全部医院</span
-          >
-        </div>
+            activeProvinceComputed =='全国'
+            ? 'active'
+            :'',LoginId != 5?'disabled':'']"
+            v-on:click="getCountryDatas('全国', 0, 5, 'china', 1, '浙江省', 4, 0)"
+          >全部医院</span></div>
         <!--  -->
         <div class="t2 choose">
           <div class="title-bar">省</div>
@@ -51,24 +43,13 @@
             <li
               v-for="pItem in provincial"
               :key="pItem.name"
-              v-on:click="
-                getDatas(
-                  pItem.name,
-                  pItem.id,
-                  pItem.level,
-                  pItem.letter,
-                  pItem.isclick,
-                  pItem.dname,
-                  pItem.dlevel,
-                  pItem.dindex
-                )
-              "
-              v-bind:class="[
-                pItem.isclick == 0 ? 'disable' : '',
-                pItem.name == activeProvinceComputed ? 'active' : ''
-              ]"
+              v-on:click="getDatas(pItem.name,pItem.id,pItem.level,pItem.letter,pItem.isclick,pItem.dname,pItem.dlevel,pItem.dindex)"
+              v-bind:class="[pItem.isclick == 0 ? 'disable':''
+            ,pItem.name==activeProvinceComputed
+            ? 'active'
+            :'']"
             >
-              {{ pItem.name }}
+              {{pItem.name}}
             </li>
           </ul>
         </div>
@@ -78,62 +59,30 @@
             <!-- <li class="active">全部</li>
           <li class="disable">杭州</li> -->
             <li
-              v-for="activeCityArrItem in activeCityArr"
+              v-for="(activeCityArrItem) in activeCityArr"
               :key="activeCityArrItem.id"
-              v-on:click="
-                secondGetData(
-                  activeCityArrItem.name,
-                  activeCityArrItem.id,
-                  activeCityArrItem.level,
-                  activeCityArrItem.letter,
-                  activeCityArrItem.isclick,
-                  activeCityArrItem.dname,
-                  activeCityArrItem.dlevel,
-                  activeCityArrItem.realname,
-                  activeCityArrItem.reallevel,
-                  activeCityArrItem.dindex
-                )
-              "
-              v-bind:class="[
-                activeCityArrItem.isclick == 0 ? 'disable' : '',
-                activeCityArrItem.name == activeProvinceComputed ||
-                activeCityArrItem.name == activeCity
-                  ? 'active'
-                  : ''
-              ]"
+              v-on:click="secondGetData(activeCityArrItem.name,activeCityArrItem.id,activeCityArrItem.level,activeCityArrItem.letter,activeCityArrItem.isclick,activeCityArrItem.dname,activeCityArrItem.dlevel,activeCityArrItem.realname,activeCityArrItem.reallevel,activeCityArrItem.dindex)"
+              v-bind:class="[activeCityArrItem.isclick == 0 ? 'disable':''
+            ,activeCityArrItem.name == activeProvinceComputed || activeCityArrItem.name == activeCity
+            ? 'active'
+            :'']"
             >
-              {{ activeCityArrItem.name }}
+              {{activeCityArrItem.name}}
             </li>
           </ul>
         </div>
         <div class="t2 choose">
           <div class="title-bar">县</div>
-          <ul class="clearfix" v-if="bviousArr">
+          <ul
+            class="clearfix"
+            v-if="bviousArr"
+          >
             <li
               v-for="bvious in bviousArr"
               :key="bvious.name"
-              @click="
-                getThressData(
-                  bvious.name,
-                  bvious.id,
-                  bvious.level,
-                  bvious.letter,
-                  bvious.isclick,
-                  bvious.dname,
-                  bvious.dlevel,
-                  bvious.dindex
-                )
-              "
-              :class="[
-                bvious.name == activeProvinceComputed ||
-                bvious.name == bviousActiveClass
-                  ? 'active'
-                  : '',
-                bvious.isclick == 0 ? 'disable' : ''
-              ]"
-            >
-              {{ bvious.name }}
-            </li>
+              @click="getThressData(bvious.name,bvious.id,bvious.level,bvious.letter,bvious.isclick,bvious.dname,bvious.dlevel,bvious.dindex)"
+              :class="[bvious.name==activeProvinceComputed || bvious.name == bviousActiveClass? 'active':'',bvious.isclick == 0 ? 'disable':'']"
+            >{{bvious.name}}</li>
           </ul>
           <div v-else>
             该地区暂无县级
@@ -141,20 +90,16 @@
         </div>
         <div
           class="t2 disable"
-          v-for="(item, index) in villageArr"
+          v-for="(item,index) in villageArr"
           :key="item.name"
         >
-          <div class="title-bar">{{ index == 0 ? "乡" : "村" }}</div>
-          <div class="title">
-            {{ item[1].name }}
-            <div class="number mid-number">
-              {{ item[1].value }}<span>所</span>
-            </div>
+          <div class="title-bar">{{index == 0?'乡':'村'}}</div>
+          <div class="title">{{item[1].name}}<div class="number mid-number">{{item[1].value}}<span>所</span></div>
           </div>
-          <div class="title" v-show="activeProvinceComputed !== '全国'">
-            {{ item[0].name }}<span class="number">{{ item[0].value }}</span
-            >所
-          </div>
+          <div
+            class="title"
+            v-show="activeProvinceComputed !== '全国'"
+          >{{item[0].name}}<span class="number">{{item[0].value}}</span>所</div>
         </div>
         <!-- <div class="t2 disable">
         <div class="title">{{clickAdress}}乡镇医院</div>
@@ -177,22 +122,25 @@ export default {
   data() {
     return {
       showFlag: "",
-      clickAdress: "", // 选中一级的地址，用于展现二级地址是什么，从一级数组里匹配
+      clickAdress: "", //选中一级的地址，用于展现二级地址是什么，从一级数组里匹配
       hoverItem: "",
       // breadArr: [], //面包屑导航 ?
       secondDefaultCity: this.$store.state.defaultCity,
       secondDlevel: this.$store.state.secondGlobalLevel,
       threeClickAddress: "",
-      breadAds: {}, // 面包屑地址 ?
+      breadAds: {}, //面包屑地址 ?
       // breadArray: this.breadArr //面包屑导航
       arrs: this.PercentArray,
-      thressRootArr: [], // 用来放三级县级地址的跟属性
-      safeThressAddress: "" // 用来暂时保存 匹配县级地址的地址
+      thressRootArr: [], //用来放三级县级地址的跟属性
+      safeThressAddress: "",//用来暂时保存 匹配县级地址的地址
+      LoginId:window.sessionStorage.getItem("LoginId"),//登陆时，保存地图参数id
+      picAddress:"",//记录当前登录账号管理院的位置信息
+      default_threeCity:""//获取默认的城市下属的默认县级城市
     };
   },
   props: {
     PercentArray: {
-      // 县乡村医院数量
+      //县乡村医院数量
       type: Array,
       default: function() {
         return [];
@@ -203,26 +151,21 @@ export default {
       default: "浙江省"
     }
   },
+  created(){
+    this.getDaohangList()
+  },
   mounted() {
-    // console.log(this.picAddress)
-    // console.log(this.picAddress.province)
-    // console.log('登陆的id:'+JSON.stringify(this.loginId))//登陆保存地图参数的id
-    // console.log('导航信息：'+JSON.stringify(this.breadArr))//导航信息
-    // console.log('省区'+JSON.stringify(this.provincial))
-    // console.log('市区：'+JSON.stringify(this.activeCityArr))//市区
-    // console.log('县区：'+JSON.stringify(this.bviousArr))//县区
-    // console.log(this.defaultProvince)//默认省份
     if (this.activeProvinceComputed == "全国") {
       this.clickAdress = this.secondCityComputed;
     } else {
       this.clickAdress = this.activeProvinceComputed;
     }
-    const level = this.$store.state.globalLevel;
+    let level = this.$store.state.globalLevel;
     // let bread = this.$store.state.accountName;
-    const ads = this.$store.state.defaultProvince;
+    let ads = this.$store.state.defaultProvince;
     // this.activeoBviousArr();
-    if (this.loginId <= 3) {
-      this.safeThressAddress = this.defaultProvince;
+    if(this.loginId<=3){
+      this.safeThressAddress = this.defaultProvince
     }
   },
   computed: {
@@ -230,18 +173,17 @@ export default {
       return this.arrs.splice(1, 2);
     },
     ...mapState([
-      "defaultProvince", // 全网请求地址
-      "loginId", // 登陆时，保存地图参数id
-      "breadArr", // 面包屑导航数组
-      "defaultCity", // 方块二级请求地址
-      "bviousName", // 县级名字
-      "picAddress"
+      "defaultProvince",//全网请求地址
+      "breadArr",//面包屑导航数组
+      "defaultCity",//方块二级请求地址
+      "bviousName",//县级名字
+      // "picAddress",
+      "appId"
     ]),
     computedBreadArray() {
-      // 计算后的面包屑导航
-      const arr = [];
-      const level = this.loginId;
-      // let level = this.breadArr[this.breadArr-1].level
+      //计算后的面包屑导航
+      let arr = [];
+      let level = window.sessionStorage.getItem("curlevel")//登录的时候储存一下当前用户登录的等级
       this.breadArr.forEach((el, index) => {
         if (el.level <= level) {
           arr.push(el);
@@ -249,40 +191,40 @@ export default {
       });
       return arr;
     },
-    getLoginId() {
-      // 反复刷新切换路由以后消失
-      return this.$store.state.loginId;
-    },
+    // getLoginId() {
+    //   // 反复刷新切换路由以后消失
+    //   return window.sessionStorage.getItem("LoginId");
+    // },
     provincial() {
       // 反复刷新切换路由以后消失
       return this.$store.state.defaultAddressArr;
     },
     globalLevel() {
-      // 一级地址的等级
+      //一级地址的等级
       return this.$store.state.globalLevel;
     },
     leftActiveAddress() {
-      // 导航左边位置的的确
+      //导航左边位置的确认
       return this.$store.state.defaultProvince;
     },
     activeProvinceComputed() {
-      // 选中的省
-      if (this.getLoginId > 3) {
+      //选中的省
+      if (this.LoginId > 3) {
         return this.leftActiveAddress;
       } else {
-        return this.$store.state.picAddress.province;
+        return this.picAddress.province;
       }
     },
     bviousActiveClass() {
-      if (this.getLoginId == 3) {
+      if (this.LoginId == 3) {
         return this.bviousName;
       }
-      if (this.getLoginId == 2) {
-        return this.defaultCity;
+      if (this.LoginId == 2) {
+        return this.default_threeCity;
       }
     },
     secondCityComputed() {
-      // 选中的城市
+      //选中的城市
       return this.$store.state.defaultCity;
     },
     activeCityArr() {
@@ -294,7 +236,7 @@ export default {
         if (item.name == this.clickAdress) {
           arr = item.city;
           // console.log(item.name)
-        } else if (item.name == this.breadArr[0].dname) {
+        }else if (item.name == this.breadArr[0].dname){
           // 全国账号下切换导航消失
           arr = item.city;
         }
@@ -311,24 +253,24 @@ export default {
       //   });
       // }
       this.provincial.forEach(item => {
-        console.log(item.name);
+        console.log(item.name)
         if (item.name == this.secondCityComputed) {
           arr = item.city;
-          console.log(item.name);
+          console.log(item.name)
         }
       });
       return arr;
     },
     activeCity() {
       // 指定二级导航的选中位置
-      if (this.getLoginId == 3) {
-        return this.$store.state.picAddress.city;
-      } else if (this.getLoginId == 2) {
-        return this.$store.state.picAddress.city;
+      if (this.LoginId == 3) {
+        return this.picAddress.city;
+      } else if (this.LoginId == 2) {
+        return this.picAddress.city;
       }
     },
     bviousArr() {
-      // 县级导航列表
+      //县级导航列表
       // *******
       // *******
       // *******
@@ -336,8 +278,8 @@ export default {
       // *******
       // *******
       let arr = [];
-      const arr2 = [];
-      const globalLevel = this.globalLevel;
+      let arr2 = [];
+      let globalLevel = this.globalLevel;
       if (globalLevel == 5) {
         this.activeCityArr.forEach(item => {
           if (item.name == "杭州市") {
@@ -366,14 +308,11 @@ export default {
         this.activeCityArr.forEach(item => {
           if (item.name == this.safeThressAddress) {
             arr = item.city;
-          } else if (item.name == this.breadArr[2].name) {
-            // 解决区级账号登录县级数据丢失问题
-            arr = item.city;
           }
         });
         return arr;
       }
-      if (this.loginId == 2) {
+      if (window.sessionStorage.getItem == 2) {
         this.activeCityArr.forEach(item => {
           if (item.name == this.picAddress.city) {
             arr = item.city;
@@ -393,10 +332,33 @@ export default {
       "getBreadArr",
       "getBviousName",
       "getBviousLevel",
-      "getIsnav"
+      "getIsnav",
+      "getDefaultAddressArr",
     ]),
+    getDaohangList(){
+      console.log(this.$store.state.appId)
+      this.$axios.fetchPost(
+        "/Home/Login/UserNav",
+        {appId:this.$store.state.appId}
+      ).then(res=>{
+        if(res.data.code == "200"){
+          // console.log(res)
+          const areaname = res.data.data.areaname;
+          const arr = res.data.data.area;//获取默认导航列表
+          this.getDefaultAddressArr(arr); // 获取默认导航列表
+          this.getDefaultProvince(areaname); // 获取全网页地址
+          this.getBreadArr(res.data.data.nav);
+          // console.log(res.data.data.nav)
+          this.getDefaultCity(res.data.data.default); // 获取二级方块地址
+          this.default_threeCity = res.data.data.default
+          if(window.sessionStorage.getItem("curlevel")-0 <= 3){
+            this.picAddress = res.data.data.address
+          }
+        }
+      })
+    },
     loginOut() {
-      // 推出登陆按钮
+      //推出登陆按钮
       this.$emit("out");
     },
     showChild() {
@@ -406,8 +368,8 @@ export default {
       this.showFlag = false;
     },
     getCountryDatas(name, id, level, letter, isClick, dname, dlevel, dindex) {
-      // 点击全国获取数据
-      if (this.getLoginId != "5") {
+      //点击全国获取数据
+      if (this.LoginId != "5") {
         isClick = 0;
       }
       if (isClick != 0) {
@@ -416,13 +378,13 @@ export default {
         this.getGlobalLevel(level);
         this.getDefaultCity(dname);
         this.getSecondGlobalLevel(dlevel);
-        const obj = { id, name, level, letter, isClick };
+        let obj = { id, name, level, letter, isClick };
         this.getSecondMapIndex(dindex);
         this.$emit("getName", obj);
       }
     },
     getDatas(name, id, level, letter, isClick, dname, dlevel, dindex) {
-      // 点击请求省级数据
+      //点击请求省级数据
       if (isClick != 0) {
         this.clickAdress = name;
         this.safeThressAddress = dname;
@@ -430,7 +392,7 @@ export default {
         this.getGlobalLevel(level);
         this.getDefaultCity(dname);
         this.getSecondGlobalLevel(dlevel);
-        const obj = { id, name, level, letter, isClick };
+        let obj = { id, name, level, letter, isClick };
         this.getSecondMapIndex(dindex);
         this.$emit("getName", obj);
       }
@@ -445,7 +407,7 @@ export default {
       dlevel,
       dindex
     ) {
-      // 点击面包屑导航
+      //点击面包屑导航
       if (this.loginId < 3) {
         isclick = 0;
         this.getDatas(name, id, level, letter, isclick, dname, dlevel, dindex);
@@ -466,13 +428,13 @@ export default {
         return;
       }
       if (level == 3) {
-        const isClick = isclick;
+        let isClick = isclick;
         this.safeThressAddress = name;
         this.getDefaultProvince(name);
         this.getGlobalLevel(level);
         this.getDefaultCity(dname);
         this.getSecondGlobalLevel(dlevel);
-        const obj = { id, name, level, letter, isClick };
+        let obj = { id, name, level, letter, isClick };
         this.$emit("getName", obj);
         this.getSecondMapIndex(dindex);
         return false;
@@ -490,9 +452,9 @@ export default {
       dindex
     ) {
       if (isClick != 0) {
-        // 点击县级地址的导航
-        // 不发送地图
-        // 不发送dname，dlevel,dindex
+        //点击县级地址的导航
+        //不发送地图
+        //不发送dname，dlevel,dindex
         // console.log(name, id, level, letter, isclick, dname, dlevel, dindex);
         // console.log("level :", level);
         letter = null;
@@ -503,7 +465,7 @@ export default {
         // this.getSecondGlobalLevel(dlevel);
         this.getBviousName(name);
         this.getBviousLevel(level);
-        const obj = { id, name, level, letter, isClick };
+        let obj = { id, name, level, letter, isClick };
         // this.getSecondMapIndex(dindex);
         this.$emit("getName", obj);
       }
@@ -520,74 +482,20 @@ export default {
       realLevel,
       dindex
     ) {
-      // 点击市级导航
+      //点击市级导航
       if (isClick != 0) {
         this.safeThressAddress = name;
         this.getDefaultProvince(name);
         this.getGlobalLevel(level);
         this.getDefaultCity(dname);
         this.getSecondGlobalLevel(dlevel);
-        const obj = { id, name, level, letter, isClick };
+        let obj = { id, name, level, letter, isClick };
         this.$emit("getName", obj);
         this.getSecondMapIndex(dindex);
       }
     }
   },
   watch: {
-    // activeCityArr(newVal) {
-    //   console.log("this.activeCityArr :", newVal);
-    // },
-    // bviousArr(newVal) {
-    //   console.log("this.bviousArr :", newVal);
-    // }
-    // defaultProvince(newVal) {
-    //   this.breadAds = {
-    //     name: newVal,
-    //     level: this.$store.state.globalLevel
-    //   };
-    //   let newLevel = this.$store.state.globalLevel;
-    //   let oldLevel = this.breadArr[this.breadArr.length - 1].level;
-    //   console.log("newLevel :", newLevel);
-    //   console.log("oldLevel :", oldLevel);
-    //   if (newLevel == oldLevel) {
-    //     if (oldLevel.length == 0) {
-    //       this.breadArr.push(this.breadAds);
-    //       this.breadArr.shift();
-    //     } else {
-    //       this.breadArr.pop();
-    //       this.breadArr.push(this.breadAds);
-    //     }
-    //     console.log("等于的情况", this.breadAds);
-    //     console.log("this.breadArr:", this.breadArr);
-    //     return;
-    //   }
-    //   if (newLevel < oldLevel) {
-    //     if (newLevel < oldLevel - 1) {
-    //       this.breadArr.push({
-    //         name: this.secondDefaultCity,
-    //         level: this.secondDlevel
-    //       });
-    //     }
-    //     this.breadArr.push(this.breadAds);
-    //     console.log("<的情况", this.breadAds);
-    //     console.log("this.breadArr:", this.breadArr);
-    //     return;
-    //   }
-    //   if (newLevel > oldLevel) {
-    //     let i = 0;
-    //     this.breadArr.forEach((item, index) => {
-    //       if (newLevel == item.level) {
-    //         i = index;
-    //       }
-    //     });
-    //     let many = this.breadArr.length - i;
-    //     this.breadArr.splice(i, many);
-    //     this.breadArr.push(this.breadAds);
-    //     console.log(">的情况", this.breadAds);
-    //     console.log("this.breadArr:", this.breadArr);
-    //     return;
-    //   }
-    // }
   }
 };
 </script>
@@ -640,14 +548,14 @@ export default {
       line-height 40px
       @media screen and (min-width:1900px){
         line-height 60px
-        font-size 19px
+        font-size 18px
       }
       &:last-child
         .symbol
           display none
       .symbol
         margin 0 10px
-        font-size 20px
+        font-size 16px
         line-height 22px
       .address-name
         cursor pointer
@@ -701,12 +609,16 @@ export default {
     transition all 0.3s ease-in
     @media screen and (min-width:1900px) {
       top 60px
+      width 350px
     }
     & > div
       padding-top 20px
       font-size 14px
       border-bottom 1px solid rgba(31, 87, 158, 0.5)
       padding 10px 0px 5px 24px
+      @media screen and (min-width:1900px) 
+        font-size 16px
+        padding 15px 0px 10px 24px
       &:last-child
         border-bottom none
     .t1
@@ -733,20 +645,32 @@ export default {
       color #7FB5F1
       cursor default
     .t2
+      @media screen and (min-width:1900px)
+        font-size 16px
       &.choose
+        @media screen and (min-width:1900px)
+          font-size 16px
         cursor pointer
         .title-bar
           margin-bottom 12px
           cursor default
+          @media screen and (min-width:1900px)
+            font-size 24px
+            margin-bottom 20px
       &.disable
         padding-bottom 0
+        .title-bar
+          @media screen and (min-width:1900px)
+            font-size 24px
+            padding-bottom 10px
       .address-t
         color #fff
-        font-size 18px
       .title
         margin-bottom 10px
+        @media screen and (min-width:1900px)
+          font-size 18px
       .mid-number
-        font-size 30px
+        font-size 20px
         margin-left 11px
       .number
         color #A6FBFF
@@ -754,6 +678,8 @@ export default {
         & > span
           color #7FB5F1
           font-size 14px
+          @media screen and (min-width:1900px)
+            font-size 16px
           margin-left 9px
       ul
         margin-top -5px
@@ -761,6 +687,9 @@ export default {
           float left
           margin-right 5px
           line-height 25px
+          @media screen and (min-width:1900px)
+            font-size 16px
+            line-height 30px
           &.active
             color #F79D1D
 </style>

@@ -4,43 +4,40 @@
     <div class="my-box">
       <div class="left">
         <el-image class="img" :src="data.logo" fit="cover"></el-image>
-        <div class="account">账号:{{ data.acount }}</div>
+        <div class="account">账号:{{data.acount}}</div>
         <div class="btn1">退出登录</div>
-        <div class="btn1" v-if="false">已下载视频11</div>
+        <div class="btn1">已下载视频11</div>
       </div>
       <div class="right">
         <div class="title">
-          {{ data.name }}
-          <span class="describe-title">{{
-            data.isstore == 1 ? "实体店" : "网院"
-          }}</span>
+          {{data.name}}
+          <span class="describe-title">{{data.isstore == 1? '实体店':'网院'}}</span>
         </div>
-        <div class="property">医院属性：{{ data.level_name }}</div>
-        <div class="name">作物科室：{{ data.zuowu }}</div>
-        <div class="text">简介：{{ data.content }}</div>
+        <div class="name">作物科室：{{data.zuowu}}</div>
+        <div class="text">简介：{{data.content}}</div>
       </div>
     </div>
-    <Nav :index="5"></Nav>
+    <Nav index="6"></Nav>
   </div>
 </template>
 <script>
-import Header from "@/components/online_hospital_header/online_hospital_header";
+import Header from "@/components/headers/headers";
 import Nav from "@/components/nav_list/nav_list";
 import { mapState } from "vuex";
 export default {
   name: "me",
   components: {
     Header,
-    Nav
+    Nav,
   },
   props: {},
   data() {
     return {
-      data: ""
+      data: "",
     };
   },
   computed: {
-    ...mapState(["appId"])
+    ...mapState(["appId"]),
   },
   watch: {},
   mounted() {
@@ -52,27 +49,22 @@ export default {
       // 获取我的医院
       this.$axios
         .fetchPost("/Home/About/GetMpDesc", { appId: this.appId })
-        .then(res => {
+        .then((res) => {
           if (res.data.code === "200") {
             this.data = res.data.data;
           }
         });
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="stylus" scoped>
 .my-container
-  padding-top 100px
-  padding-bottom 150px
   .my-box
-    max-width 1900px
-    margin 0 auto
-    padding 0 40px
+    margin 60px 88px 0
     display flex
     .left
-      width 300px
-      margin-right 50px
+      width 412px
       .img
         width 300px
         height 300px
@@ -109,29 +101,25 @@ export default {
       height 730px
       overflow auto
       .title
-        font-size 34px
+        font-size 52px
         color #fff
         display flex
         align-items center
         .describe-title
           padding 0 23px
           background #FF6600
-          font-size 28px
+          font-size 32px
           color #FFFFFF
           margin-left 17px
           border-radius 25px
           height 50px
           line-height 50px
-      .property
-        color #F9FAFA
-        font-size 30px
-        margin-top 35px
       .name
         color #F9FAFA
         font-size 30px
         margin-bottom 15px
       .text
-        font-size 24px
+        font-size 30px
         margin-top 40px
         font-family SimHei
         font-weight 400

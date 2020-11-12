@@ -32,7 +32,7 @@
         </div>
       </li>
       <li class="li9" style="margin-right:0;margin-left:20px;background:#fff">
-        <el-image :src="code"></el-image>
+        <div class="icon i9">二维码</div>
       </li>
 
       <!-- <li class="li2">
@@ -53,10 +53,12 @@
         <div class="icon i4"></div>
         <p>测土配方</p>
       </li>
+
       <li class="li6">
         <div class="icon i6"></div>
         <p>会员</p>
       </li>
+
       <li class="langer li7">
         <div class="icon i7"></div>
         <p>下级医院</p>
@@ -73,31 +75,20 @@
   </div>
 </template>
 <script>
-// import headers from "@/components/online_hospital_header";
+// import headers from "@/components/headers/headers";
 import Nav from "@/components/nav_list/nav_list";
 export default {
   name: "online_hospital_channel",
   components: { Nav },
   props: {},
   data() {
-    return {
-      code: ""
-    };
+    return {};
   },
   computed: {},
   watch: {},
-  mounted() {
-    this.getErCode();
-  },
+  mounted() {},
   destroyed() {},
   methods: {
-    getErCode() {
-      this.$axios.fetchPost("/Admin/Api/get_qr_code").then(res => {
-        if (res.data.code == 200) {
-          this.code = res.data.data.qrcode;
-        }
-      });
-    },
     channelRoute(where) {
       switch (where) {
         case "网诊":
@@ -107,27 +98,27 @@ export default {
           break;
         case "专家":
           this.$router.push({
-            path: "/expert"
+            path: "/online_hospital_online"
           });
           break;
         case "培训视频":
           this.$router.push({
-            path: "/video"
+            path: "/online_hospital_online"
           });
           break;
         case "资讯":
           this.$router.push({
-            path: "/find"
+            path: "/online_hospital_online"
           });
           break;
         case "网病虫害图库":
           this.$router.push({
-            path: "/find"
+            path: "/online_hospital_online"
           });
           break;
         case "已下载的视频":
           this.$router.push({
-            path: "/video"
+            path: "/online_hospital_online"
           });
           break;
       }

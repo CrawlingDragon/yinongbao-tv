@@ -3,32 +3,27 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 Vue.use(VueRouter);
-//* 以下是驾驶舱新增的
+//*以下是驾驶舱新增的
 const originalPush = VueRouter.prototype.push;
 VueRouter.prototype.push = function push(location) {
-  return originalPush.call(this, location).catch((err) => err);
+  return originalPush.call(this, location).catch((err) => err);
 };
 //*
 const routes = [
-  //* 以下是驾驶舱新增的
+  //*以下是驾驶舱新增的
   {
     path: "/",
     component: () =>
       import(/* webpackChunkName: "WebForCounty" */ "../views/index_four/web-for-country.vue")
   },
   {
-    path: "/findindex",
+    path:'/findindex',
     component: () =>
       import(/* webpackChunkName: "findindex" */ "../views/find-index/find-index")
   },
   {
-    path: "/find_detail",
-    component: () =>
-      import(/* webpackChunkName: "find_detail" */ "../views/find_detail/find_detail")
-  },
-  {
-    path: "/home",
-    name: "home",
+    path: '/home',
+    name: 'home',
     component: () =>
       import(/* webpackChunkName: "WebForCounty" */ "../views/index_four/web-for-country.vue")
   },
@@ -42,7 +37,7 @@ const routes = [
     path: "/expertlist",
     name: "expertlist",
     component: () =>
-      import(/* webpackChunkName: "expertlist" */ "../views/expert-list/expert-list.vue")
+      import(/* webpackChunkName: "expertlist" */ "../views/expert_list/expert_list.vue")
   },
   {
     path: "/hospitalsort",
@@ -104,13 +99,6 @@ const routes = [
     name: "IndexFour",
     component: () => import(/* webpackChunkName: "index */ "../views/index_four/index.vue"),
   },
-  //* * */
-  // {
-  //   path: "/",
-  //   name: "indexFirst",
-  //   component: () =>
-  //     import(/* webpackChunkName: "index_first" */ "../views/index_first/index_first.vue")
-  // },
   {
     path: "/indexFirst",
     name: "indexFirst",
@@ -206,27 +194,6 @@ const routes = [
       )
   },
   {
-    path: "/online_hospital_channel",
-    name: "online_hospital_channel",
-    component: () =>
-      import(
-        /* webpackChunkName: "online_hospital_channel" */ "../views/online_hospital_channel/online_hospital_channel.vue"
-      )
-  },
-  {
-    path: "/online_hospital_channel_second",
-    name: "online_hospital_channel_second",
-    component: () =>
-      import(
-        /* webpackChunkName: "online_hospital_channel_second" */ "../views/online_hospital_channel_second/online_hospital_channel_second"
-      )
-  },
-  {
-    path: "/second_wang",
-    name: "second_wang",
-    component: () => import(/* webpackChunkName: "second_wang" */ "../views/second_wang/second_wang.vue")
-  },
-  {
     path: "/me",
     name: "me",
     component: () => import(/* webpackChunkName: "me" */ "../views/me/me.vue")
@@ -237,6 +204,14 @@ const routes = [
     component: () =>
       import(
         /* webpackChunkName: "online_detail" */ "../views/online_detail/online_detail.vue"
+      )
+  },
+  {
+    path:"/online_hospital_channel",
+    name:"online_hospital_channel",
+    component:()=>
+      import(
+         /* webpackChunkName: "online_hospital_channel" */ "../views/online_hospital_channel/online_hospital_channel.vue"
       )
   },
   {
@@ -332,7 +307,89 @@ const routes = [
           )
       }
     ]
-  }
+  },
+  {
+    path:'/second_huiyuan_list',
+    component:()=>
+    import(/* webpackChunkName: "second_huiyuan_list" */"../views/second_huiyuan_list/second_huiyuan_list.vue")
+  },
+  {
+    path:'/second_huiyuan_itro',
+    component:()=>
+    import(/* webpackChunkName: "second_huiyuan_itro" */ "../views/second_huiyuan_itro/second_huiyuan_itro.vue"),
+    children: [
+      {
+        path: "",
+        component: () =>
+          import(
+            /* webpackChunkName: "huiyuan_wang" */ "../views/huiyuan_wang/huiyuan_wang.vue"
+          )
+      },
+      {
+        path: "/second_huiyuan_itro/huiyuan_wang",
+        component: () =>
+          import(
+            /* webpackChunkName: "huiyun_wang" */ "../views/huiyuan_wang/huiyuan_wang.vue"
+          )
+      },
+      {
+        path: "/second_huiyuan_itro/huiyuan_tu",
+        component: () =>
+          import(
+            /* webpackChunkName: "huiyuan_tu" */ "../views/huiyuan_tu/huiyuan_tu.vue"
+          )
+      },
+      {
+        path: "/second_huiyuan_itro/huiyuan_jianjie",
+        component: () =>
+          import(
+            /* webpackChunkName: "huiyuan_intro" */ "../views/huiyuan_jianjie/huiyuan_jianjie.vue"
+          )
+      },
+      {
+        path: "/second_huiyuan_itro/huiyuan_dingdan",
+        component: () =>
+          import(
+            /* webpackChunkName: "huiyuan_dingdan" */ "../views/huiyuan_dingdan/huiyuan_dingdan.vue"
+          )
+      },
+    ]
+  },
+  {
+    path:'/huiyuan_dingdan/second_order_detail',
+    component:()=>
+    import(/* webpackChunkName: "second_order_detail" */"../views/second_order_detail/second_order_detail.vue")
+  },
+  {
+    path:'/wangzhen_detail',
+    component:()=>
+    import(/* webpackChunkName: "wangzhen_detail" */"../views/wangzhen_detail/wangzhen_detail.vue")
+  },
+  {
+    path:'/cetu_detail',
+    component:()=>
+    import(/* webpackChunkName: "cetu_detail" */"../views/cetu_detail/cetu_detail.vue")
+  },
+  {
+    path:'/xunzhen_detail',
+    component:()=>
+    import(/* webpackChunkName: "xunzhen_detail" */"../views/xunzhen_detail/xunzhen_detail.vue")
+  },
+  {
+    path:'/zuozhen_detail',
+    component:()=>
+    import(/* webpackChunkName: "zuozhen_detail" */"../views/zuozhen_detail/zuozhen_detail.vue")
+  },
+  {
+    path:'/expert_paihang',
+    component:()=>
+    import(/* webpackChunkName: "expert_paihang" */"../views/expert_paihang/expert_paihang.vue")
+  },
+  {
+    path:'/sao_yinongbao',
+    component:()=>
+    import(/* webpackChunkName: "sao_yinongbao" */"../views/sao_yinongbao/sao_yinongbao.vue")
+  },
 ];
 
 const router = new VueRouter({

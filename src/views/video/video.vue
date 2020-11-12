@@ -1,32 +1,17 @@
 <template>
   <div class="video-container">
     <Header title="培训视频"></Header>
-    <div class="tab-bar">
-      <div
-        class="item"
-        v-for="(item, index) in menu"
-        :key="item.catid"
-        @click="changeVideo(index, item.catid)"
-        :class="{ active: active == index }"
-      >
-        {{ item.catname }}
-      </div>
-    </div>
     <ul class="video-ul">
-      <li
-        v-for="item in list"
-        :key="item.id"
-        @click="goToVideoDetail(item.id, item.catid)"
-      >
+      <li v-for="item in list" :key="item.id" @click="goToVideoDetail(item.id,item.catid)">
         <el-image class="img" fit="cover" :src="item.thumb"></el-image>
-        <p class="p1">{{ item.title }}</p>
+        <p class="p1">{{item.title}}</p>
       </li>
     </ul>
-    <div class="result-num">共{{ maxitem }}个结果</div>
+    <div class="result-num">共{{list.length}}个结果</div>
   </div>
 </template>
 <script>
-import Header from "@/components/online_hospital_header/online_hospital_header";
+import Header from "@/components/headers/headers";
 import { mapState } from "vuex";
 
 export default {
@@ -36,45 +21,24 @@ export default {
   data() {
     return {
       list: [],
-      active: 0,
-      menu: [],
-      maxitem: 0
     };
   },
   computed: {
-    ...mapState(["appId"])
+    ...mapState(["appId"]),
   },
   watch: {},
   mounted() {
     this.getVideoList();
-    this.gerVideoMenu();
   },
   destroyed() {},
   methods: {
-    gerVideoMenu() {
-      this.$axios
-        .fetchPost("/Home/Video/GetVideoMenu", { appId: this.appId })
-        .then(res => {
-          if (res.data.code == 200) {
-            this.menu = res.data.data;
-          }
-        });
-    },
-    changeVideo(num, catid) {
-      this.active = num;
-      this.getVideoList(catid);
-    },
-    getVideoList(catid) {
+    getVideoList() {
       // 获取视频列表
       this.$axios
-        .fetchPost("/Home/Video/GetVideoList", {
-          appId: this.appId,
-          catid: catid
-        })
-        .then(res => {
+        .fetchPost("/Home/Video/GetVideoList", { appId: this.appId })
+        .then((res) => {
           if (res.data.code == 200) {
             this.list = res.data.data;
-            this.maxitem = res.data.maxitem;
           }
         });
     },
@@ -82,17 +46,16 @@ export default {
       // 点击进入视频详情页
       this.$router.push({
         path: "/video_detail",
-        query: { id: id, catid: catid }
+        query: { id: id, catid: catid },
       });
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="stylus" scoped>
 .video-container
-  padding-top 100px
   .video-ul
-    margin 70px 90px 0
+    margin 40px 90px 0
     text-align left
     & > li
       width 409px
@@ -132,16 +95,4 @@ export default {
     text-align left
     font-size 30px
     color #B5B5B5
-.tab-bar
-  text-align center
-  & > .item
-    display inline-block
-    font-size 30px
-    color #C5C5C5
-    padding 0 10px 10px
-    margin-right 50px
-    cursor pointer
-    &.active
-      color #ff6600
-      border-bottom 1px solid #ff6600
 </style>

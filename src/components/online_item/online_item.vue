@@ -1,26 +1,24 @@
 <template>
-  <!-- 缃戦櫌缃戣瘖鐨勫崟涓猯i -->
+  <!-- 网院网诊的单个li -->
   <div class="online_item-container">
-    <div class="wrap">
-      <div class="icon"></div>
-      <div class="text">
-        <div class="time">
-          {{ item.title }}
-          <span style="margin-left :20px">{{ item.showtime }}</span>
-        </div>
-        <p class="p1">
-          {{ item.content }}
-        </p>
+    <div class="icon"></div>
+    <div class="text">
+      <div class="time">
+        {{ item.title }}
+        <span style="margin-left :20px">{{ item.showtime }}</span>
       </div>
-      <div class="answer">
-        <div class="p2">鍥炲鏁帮細{{ item.replies }}</div>
-        <el-image
-          fit="cover"
-          :src="item.thumb_pic"
-          class="img"
-          v-if="item.thumb_pic"
-        ></el-image>
-      </div>
+      <p class="p1">
+        {{ item.content }}
+      </p>
+    </div>
+    <div class="answer">
+      <div class="p2">回复数：{{ item.replies }}</div>
+      <el-image
+        fit="cover"
+        :src="item.thumb_pic"
+        class="img"
+        v-if="item.thumb_pic"
+      ></el-image>
     </div>
   </div>
 </template>
@@ -51,7 +49,7 @@ export default {
   padding-bottom 155px
   max-height 690px
   padding 0 40px
-  & > .wrap
+  & > li
     background rgba(9, 29, 67, 0.4)
     border 1px solid rgba(255, 255, 255, 0.2)
     margin-bottom 11px

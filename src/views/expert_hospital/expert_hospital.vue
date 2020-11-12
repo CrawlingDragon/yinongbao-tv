@@ -12,20 +12,19 @@
   </div>
 </template>
 <script>
-import Header from "@/components/online_hospital_header/online_hospital_header";
-
+import Header from "../../components/headers/headers"
 export default {
   name: "expert_hospital",
   components: { Header },
   props: {},
   data() {
-    return {};
+    return {}
   },
   computed: {},
   watch: {},
   mounted() {},
   destroyed() {},
   methods: {}
-};
+}
 </script>
 <style lang="stylus" scoped></style>
