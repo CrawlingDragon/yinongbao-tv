@@ -1797,8 +1797,8 @@ async-each@^1.0.1:
 
 async-limiter@~1.0.0:
   version "1.0.1"
-  resolved "https://registry.npm.taobao.org/async-limiter/download/async-limiter-1.0.1.tgz#dd379e94f0db8310b08291f9d64c3209766617fd"
-  integrity sha1-3TeelPDbgxCwgpH51kwyCXZmF/0=
+  resolved "https://registry.yarnpkg.com/async-limiter/-/async-limiter-1.0.1.tgz#dd379e94f0db8310b08291f9d64c3209766617fd"
+  integrity sha512-csOlWGAcRFJaI6m+F2WKdnMKr4HhdhFVBk0H/QbJFMCr+uO2kwohwXQPxw/9OCxp05r5ghVBFSyioixx3gfkNQ==
 
 async-validator@~1.8.1:
   version "1.8.5"
@@ -3517,11 +3517,6 @@ electron-to-chromium@^1.3.585:
   version "1.3.586"
   resolved "https://registry.npm.taobao.org/electron-to-chromium/download/electron-to-chromium-1.3.586.tgz?cache=0&sync_timestamp=1604370857583&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Felectron-to-chromium%2Fdownload%2Felectron-to-chromium-1.3.586.tgz#1484f59b2f820f5f3278f0c6ead71d05b19a1311"
   integrity sha1-FIT1my+CD18yePDG6tcdBbGaExE=
-
-element-in-view@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.npm.taobao.org/element-in-view/download/element-in-view-0.1.0.tgz#662f41f9a8d3b8ca4587c1ddb427b7d27af88bc9"
-  integrity sha1-Zi9B+ajTuMpFh8HdtCe30nr4i8k=
 
 element-ui@^2.13.2:
   version "2.14.0"
@@ -8760,11 +8755,6 @@ throttle-debounce@^1.0.1:
   resolved "https://registry.npm.taobao.org/throttle-debounce/download/throttle-debounce-1.1.0.tgz?cache=0&sync_timestamp=1604313841379&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fthrottle-debounce%2Fdownload%2Fthrottle-debounce-1.1.0.tgz#51853da37be68a155cb6e827b3514a3c422e89cd"
   integrity sha1-UYU9o3vmihVctugns1FKPEIuic0=
 
-throttleit@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.npm.taobao.org/throttleit/download/throttleit-1.0.0.tgz#9e785836daf46743145a5984b6268d828528ac6c"
-  integrity sha1-nnhYNtr0Z0MUWlmEtiaNgoUorGw=
-
 through2@^2.0.0:
   version "2.0.5"
   resolved "https://registry.npm.taobao.org/through2/download/through2-2.0.5.tgz?cache=0&sync_timestamp=1593478693312&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fthrough2%2Fdownload%2Fthrough2-2.0.5.tgz#01c1e39eb31d07cb7d03a96a70823260b23132cd"
@@ -9255,14 +9245,6 @@ vue-meta@^2.4.0:
   dependencies:
     deepmerge "^4.2.2"
 
-vue-mugen-scroll@^0.2.6:
-  version "0.2.6"
-  resolved "https://registry.npm.taobao.org/vue-mugen-scroll/download/vue-mugen-scroll-0.2.6.tgz#f1c90a8363a8966b3217524f3e97f76b0b817303"
-  integrity sha1-8ckKg2OolmsyF1JPPpf3awuBcwM=
-  dependencies:
-    element-in-view "^0.1.0"
-    throttleit "^1.0.0"
-
 vue-router@^3.2.0:
   version "3.4.8"
   resolved "https://registry.npm.taobao.org/vue-router/download/vue-router-3.4.8.tgz?cache=0&sync_timestamp=1603710629657&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fvue-router%2Fdownload%2Fvue-router-3.4.8.tgz#2c06261d35d8075893470352d42d70b6287b8194"
@@ -9732,9 +9714,9 @@ write@1.0.3:
     mkdirp "^0.5.1"
 
 ws@^6.0.0, ws@^6.2.1:
-  version "6.2.1"
-  resolved "https://registry.npm.taobao.org/ws/download/ws-6.2.1.tgz?cache=0&sync_timestamp=1593925420205&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fws%2Fdownload%2Fws-6.2.1.tgz#442fdf0a47ed64f59b6a5d8ff130f4748ed524fb"
-  integrity sha1-RC/fCkftZPWbal2P8TD0dI7VJPs=
+  version "6.2.2"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-6.2.2.tgz#dd5cdbd57a9979916097652d78f1cc5faea0c32e"
+  integrity sha512-zmhltoSR8u1cnDsD43TX59mzoMZsLKqUweyYBAIvTngR3shc0W6aOZylZmq/7hqyVxPdi+5Ud2QInblgyE72fw==
   dependencies:
     async-limiter "~1.0.0"
 
